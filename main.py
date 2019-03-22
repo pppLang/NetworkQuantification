@@ -6,6 +6,8 @@ from torch.autograd import Function as F
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
 import numpy as np
+from model import AlexNet_small
+from loaddata import dataset
 from utils import SignFunction, BinConv2d, updataConvWei
 from train import train_epoch, test
 
@@ -27,12 +29,13 @@ if __name__ == "__main__":
                    ]))
     test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=64, shuffle=False) """
 
-    # net = TestNet(3, 64)
-    net = TestNet()
+    train_loader = torch.utils.data.DataLoader(dataset('train'), batch_size=64, shuffle=True)
+    test_loader = torch.utils.data.DataLoader(dataset('test'), batch_size=64)
+    net = AlexNet_small(10)
     net.cuda()
     optimizer = optim.Adam(net.parameters(), lr=1e-2, weight_decay=1e-6, betas=(0.9, 0.999))
-    criterion = nn.NLLLoss().cuda()
-    criterion_test = nn.NLLLoss(reduce='sum').cuda()
+    criterion = nn.CrossEntropyLoss().cuda()
+    criterion_test = nn.CrossEntropyLoss(reduction='sum').cuda()
 
     epoch_num = 10
     lr0 = 1e-4

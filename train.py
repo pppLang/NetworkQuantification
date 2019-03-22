@@ -9,17 +9,15 @@ def train_epoch(model, optimizer, train_loader, criterion, epoch, writer=None, c
         model.zero_grad()
         optimizer.zero_grad()
         data = data.cuda()
-        label = label.cuda()
+        label = label.cuda().long()
+        # print(data.shape)
         result = model(data)
         loss = criterion(result, label)
         loss.backward()
-        # print(model.conv1.conv.weight.grad)
-        # print(current_lr)
-        updataConvWei(model, current_lr)
+        # updataConvWei(model, current_lr)
         optimizer.step()
         if i%10==0:
-            print('epoch {}, [{}/{}], loss {}'
-            .format(epoch, i, num, loss))
+            print('epoch {}, [{}/{}], loss {}'.format(epoch, i, num, loss))
 
 def test(model, test_loader, criterion):
     model.eval()
