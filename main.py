@@ -11,7 +11,8 @@ from loaddata import dataset
 from utils import SignFunction, BinConv2d, updataConvWei
 from train import train_epoch, test
 
-
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = "7"
 
 
 
