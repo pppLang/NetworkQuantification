@@ -38,4 +38,4 @@ def test(model, test_loader, criterion, epoch, writer=None):
     print('epoch {}, test loss {}, acc [{}/{}]'.format(epoch, test_loss, correct, len(test_loader.dataset)))
     if writer is not None:
         writer.add_scalar('test_loss', test_loss, epoch)
-        writer.add_scalar('acc', correct/len(test_loader.dataset))
+        writer.add_scalar('acc', correct/len(test_loader.dataset), epoch)
