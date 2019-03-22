@@ -42,13 +42,13 @@ class BinConv2d(nn.Module):
         self.conv = nn.Conv2d(in_channels, out_channels, kernel_size, stride, 
         padding=padding, dilation=dilation, groups=groups, bias=False)
 
-        self.real_weight = self.conv.weight.clone().cuda()
+        self.real_weight = self.conv.weight.data.clone().cuda()
         # self._parameters.append({})
 
     def forward(self, x):
         self.conv.weight.data = self.real_weight.sign()
-        fea = SignFunction()(x)
-        fea = self.conv(fea)
+        # fea = SignFunction()(x)
+        fea = self.conv(x)
         return fea
 
 

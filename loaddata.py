@@ -8,10 +8,10 @@ import sys
 class dataset(Dataset):
     def __init__(self, mode='train'):
         if mode=='train':
-            file_path = 'C:\\Users\\user\\Documents\\ModelCompression\\Bi-Real-Net-by-me\\data_cifia10\\data_batch_{}'
+            file_path = '/data0/langzhiqiang/cifar-10/data_batch_{}'
             self.data, self.labels = load_traindata(file_path=file_path)
         elif mode=='test':
-            file_path = 'C:\\Users\\user\\Documents\\ModelCompression\\Bi-Real-Net-by-me\\data_cifia10\\test_batch'
+            file_path = '/data0/langzhiqiang/cifar-10/test_batch'
             data_dict = unpickle(file_path)
             self.data = data_dict[b'data']
             self.labels = data_dict[b'labels']
@@ -33,7 +33,7 @@ def unpickle(file):
     return dict
 
 
-def load_traindata(file_path = 'C:\\Users\\user\\Documents\\ModelCompression\\Bi-Real-Net-by-me\\data_cifia10\\data_batch_{}'):
+def load_traindata(file_path = '/data0/langzhiqiang/cifar-10/data_batch_{}'):
     train_data = None
     train_labels = None
     for i in range(5):
